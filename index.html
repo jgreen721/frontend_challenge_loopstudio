@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Loopstudios landing page</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap');
+
+    *{
+      margin:0;
+      padding:0;
+    }
+
+    .overlay-menu{
+      height:100vh;
+      width:100%;
+      background:black;
+      color:white;
+      z-index:3;
+      position:absolute;
+      top:0;
+      left:0;
+      transition:1s ease;
+    }
+
+    .close{
+      font-size:20px;
+    }
+
+    .hide-overlay{
+      transform:translateX(150%)
+    }
+
+    .between{
+      display:flex;
+      align-items:center;
+      padding:2em;
+      justify-content: space-evenly
+    }
+
+    .overlay-links{
+      position:relative;
+      width:50%;
+      left:15%;
+      top:5%;
+    }
+
+    .overlay-links li{
+      list-style:None;
+      margin:15px 0px;
+      cursor:pointer;
+    }
+
+    .overlay-links li:hover{
+      text-decoration:underline;
+    }
+
+
+    body{
+      height:100vh;
+      width:100vw;
+      box-sizing:border-box;
+      position:relative;
+      overflow-x:hidden;
+      font-family: 'Josefin Sans', sans-serif;
+
+    }
+
+    .app{
+      height:100%;
+      width:100%;
+      /* position:relative;
+      overflow-x:hidden; */
+
+    }
+
+    .column{
+      height:100%;
+      width:100%;
+      /* border:2px solid black; */
+    }
+
+    .hero, .content{
+      height:50%;
+      width:100%;
+      position:relative;
+    }
+
+    .hero-content{
+      position:absolute;
+      top:0;
+      left:0;
+      padding:.5em;
+      height:100%;
+      width:100%;
+      color:white;
+    }
+
+    .nav{
+      height:15%;
+      display:flex;
+      align-items:center;
+      width:100%;
+      justify-content: space-between;
+    }
+
+    .nav-links{
+      display:flex;
+      margin-right:50px;
+   
+    }
+
+    .nav-item{
+      list-style:none;
+      margin:0px 10px;
+    }
+
+    a{
+      text-decoration:none;
+      color:white;
+      cursor:pointer;
+    }
+
+    .burger{
+      display:none;
+      cursor:pointer;
+      margin-right:20px;
+
+    }
+
+    .line{
+      height:2px;
+      width:25px;
+      background:white;
+      margin:2px 0px;
+    }
+    
+
+    .hero-img{
+      height:100%;
+      width:100%;
+    }
+
+    .hero-card{
+      width:50%;
+      height:50%;
+      border:2px solid white;
+      display:flex;
+      flex-direction:column;
+      align-items:start;
+      justify-content: center;
+      padding:1em;
+    }
+
+
+
+    .content-wrapper{
+      height:65%;
+      /* background:green; */
+      padding:1em;
+    }
+
+
+
+    .content{
+      /* display:flex;
+      align-items:center;
+      justify-content: center; */
+      width:90%;
+      margin:0 auto;
+      position:relative;
+      /* padding:2em; */
+      margin:5px 0px;
+    }
+
+    .content-card{
+      width:75%;
+      height:85%;
+      /* border:2px solid red; */
+
+    }
+
+    .interactive-img{
+      height:100%;
+      width:100%;
+    }
+
+    .content-section{
+      width:50%;
+      height:55%;
+      position:absolute;
+      bottom:-5%;
+      left:55%;
+      background:white;
+      padding:1em;
+    }
+
+    .content-p{
+      font-size:12px;
+    }
+
+    .menu-grid{
+      height:75%;
+      width:100%;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      grid-gap:3px;
+    }
+
+
+    .caption-h1{
+      transform:translateY(-100px);
+      color:white;
+      margin-left:35px;
+    }
+
+
+
+    .footer{
+      height:15%;
+      width:100%;
+      display:flex;
+      position:relative;
+      color:white;
+      background:black;
+    }
+
+    .footer-column{
+      width:50%;
+      display:flex;
+      align-items:flex-start;
+      justify-content: center;
+      flex-direction:column;
+    }
+
+
+    .media-links, .footer-links{
+      display:flex;
+    }
+
+    .media-links{
+      width:90%;
+      justify-content: flex-end;
+    }
+  
+
+    .media-item, .footer-item{
+      list-style:none;
+    }
+
+    .media-item{
+      margin:0px 5px;
+    }
+
+
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+
+
+
+    @media screen and (max-width:850px){
+      .menu-grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        height:235%;
+        /* background:green; */
+      }
+    }
+
+
+
+
+    @media screen and (max-width:650px){
+      .menu-grid{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        height:325%;
+        /* background:yellow; */
+      }
+    }
+
+
+
+    @media screen and (max-width:450px){
+      /* body{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+      } */
+      .hero-card{
+        width:80%;
+        position:relative;
+        min-width:250px;
+        /* margin:0 auto; */
+      }
+
+      .nav{
+        justify-content: space-between;
+      }
+
+      .burger{
+        display:block;
+      }
+
+      .nav-item{
+        display:none;
+      }
+
+      .content{
+        display:flex;
+        align-items:center;
+        flex-direction:column;
+        padding:0;
+      }
+
+      .content-card{
+        width:100%;
+      }
+
+      .content-section{
+        width:100%;
+        height:50%;
+        position:relative;
+        top:0;
+        left:0;
+      }
+
+      .card{
+        border:1px solid black;
+        width:95%;
+        height:200px;
+        margin:0 auto;
+        position:relative;
+        /* margin:15px 0px; */
+        overflow:hidden;
+      }
+
+      .card-img-div{
+        height:100%;
+        position:relative;
+      }
+
+      .card-img{
+        width:100%;
+      }
+
+      .caption{
+        z-index:2;
+        color:white;
+        position:absolute;
+        top:100%;
+        left:0;
+      }
+
+      .menu-grid{
+        grid-template-columns:repeat(1,1fr);
+        grid-gap:15px;
+        height:275%;
+        /* background:blue; */
+
+      }
+
+      .footer-links{
+        display:flex;
+        flex-direction:column;
+      }
+
+      .media-links{
+        margin-top:15px;
+        justify-content: center;
+      }
+
+      .media-item{
+        margin:0px 5px;
+      }
+
+      .footer-item{
+        margin:5px 0px;
+      }
+
+      .footer{
+        display:flex;
+        flex-direction:column;
+        height:225px;
+      }
+
+      .footer-column{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items:center;
+      }
+
+      .nav-links{
+        flex-direction:column;
+      }
+    }
+
+  
+/* .column1{
+  background:orange;
+} */
+  
+  </style>
+</head>
+<body>
+
+  <div class="app">
+    <div class="column column1">
+
+      <div class="hero">
+        <img class="hero-img" src="./images/desktop/image-hero.jpg" alt="hero-img">
+        <div class="hero-content">
+          <div class="nav">
+            <div class="nav-header">
+              <h2>loopstudios</h2>
+            </div>
+            <ul class="nav-links">
+              <li class="nav-item">
+                <a href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">Careers</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">Events</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">Products</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">Support</a>
+              </li>
+              <div class="burger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+              <div class="overlay-menu">
+                <div class="flex between">
+                  <h2>Loop Studios</h2>
+                  <span class="close">&times;</span>
+</div>
+                  <ul class="overlay-links">
+                    <li>
+                      <a href="#"><h2>About</h2></a>
+                    </li>
+                    <li>
+                      <a href="#"><h2>Careers</h2></a>
+                    </li>
+                    <li>
+                      <a href="#"><h2>Events</h2></a>
+                    </li>
+                    <li>
+                      <a href="#"><h2>Products</h2></a>
+                    </li>
+                    <li>
+                      <a href="#"><h2>Support</h2></a>
+                    </li>
+                  </ul>
+                
+              </div>
+            </ul>
+          </div>
+          <div class="hero-card">
+            <h1>IMMERSIVE <br/> EXPERIENCES </h1>
+            <h1>THAT DELIVER</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-wrapper">
+
+      <div class="content">
+        <div class="content-card">
+          <img class="interactive-img" src="./images/desktop/image-interactive.jpg" alt="img">
+        </div>
+        <div class="content-section">
+          <h2>THE LEADER IN INTERACTIVE VR</h2>
+          <p class="content-p">  Founded in 2011, Loopstudios has been producing world-class virtual reality 
+            projects for some of the best companies around the globe. Our award-winning 
+            creations have transformed businesses through digital experiences that bind 
+            to their brand.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="column column2"> -->
+      
+
+    </div>
+    <!-- </div> -->
+
+    <!-- </div> -->
+
+
+    <div class="menu-grid">
+        
+    </div>
+
+  <div class="footer">
+    <div class="footer-column">
+      <h4>loopstudios</h4>
+      <ul class= "footer-links">
+        <li class="footer-item">
+          <a href="#">About</a>
+        </li>
+        <li class="footer-item">
+          <a href="#">Careers</a>
+        </li>
+        <li class="footer-item">
+          <a href="#">Events</a>
+        </li>
+        <li class="footer-item">
+          <a href="#">Products</a>
+        </li>
+        <li class="footer-item">
+          <a href="#">Support</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <ul class="media-links">
+        <li class="media-item">
+          <a href="#">
+            <img src="./images/icon-facebook.svg" alt="footer-icon">
+          </a>
+        </li>
+        <li class="media-item">
+          <a href="#">
+            <img src="./images/icon-twitter.svg" alt="footer-icon">
+          </a>
+        </li>
+        <li class="media-item">
+          <a href="#">
+            <img src="./images/icon-pinterest.svg" alt="footer-icon">
+          </a>
+        </li>
+        <li class="media-item">
+          <a href="#">
+            <img src="./images/icon-instagram.svg" alt="footer-icon">
+          </a>
+        </li>
+      </ul>
+      <p>
+        © 2021 Loopstudios. All rights reserved.
+
+      </p>
+    </div>
+</div>
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+
+</div>
+
+  <template class="vr-template">
+    <div class="card">
+      <div class='card-img-div'></div>
+      <h4 class="caption"></h4>
+    </div>
+  </template>
+
+
+  <script>
+
+    var template = document.querySelector(".vr-template")
+
+    function publishImages(folder){
+      let images = [{path:`images/${folder}/image-curiosity.jpg`,caption:'Deep <br>Earth'},
+                    {path:`images/${folder}/image-deep-earth.jpg`,caption:'Night<br> Arcade'},
+                    {path:`images/${folder}/image-fisheye.jpg`,caption:'Soccer<br> Team VR'},
+                    {path:`images/${folder}/image-from-above.jpg`,caption:'From Up<br> Above VR'},
+                    {path:`images/${folder}/image-night-arcade.jpg`,caption:'Night<br> Arcade'},
+                    {path:`images/${folder}/image-pocket-borealis.jpg`,caption:'Pocket<br> Borealis'},
+                    {path:`images/${folder}/image-soccer-team.jpg`,caption:'Soccer<br> Teame VR'},
+                    {path:`images/${folder}/image-grid.jpg`,caption:'The<br>Grid'},
+                    ]
+
+
+              images.map(i=>{
+                let vrCard = template.content.cloneNode(true)
+                    vrCard.querySelector(".card-img-div").innerHTML = `<img class='card-img' src=${i.path} alt='img'>`
+                    vrCard.querySelector(".caption").innerHTML = `<h1 class="caption-h1">${i.caption}</h1>`
+                  console.log(vrCard)
+                    document.querySelector(".menu-grid").append(vrCard)
+              })
+    }
+
+    publishImages("desktop")
+
+
+
+    document.querySelector(".burger").onclick=()=>{
+      document.querySelector(".overlay-menu").classList.remove("hide-overlay")
+    }
+
+    document.querySelector(".close").onclick=()=>{
+      document.querySelector(".overlay-menu").classList.add("hide-overlay")
+
+    }
+
+    
+
+  </script>
+</body>
+</html>
